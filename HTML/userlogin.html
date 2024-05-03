@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <style>
+      .login-form {
+        /* height: 520px; */
+        width: 450px;
+        background-color: white;
+        border-radius: 15px;
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        /* margin: auto; */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .admin-heading {
+        text-align: center;
+        margin-top: 50px;
+      }
+
+      .form-input {
+        margin: 30px;
+      }
+
+      .form-input label {
+        display: block;
+        font-size: 20px;
+        margin-bottom: 10px;
+      }
+
+      .form-input input[type="email"],
+      .form-input input[type="password"] {
+        width: 95%;
+        padding: 10px;
+        font-size: 16px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        border: none;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      }
+
+      .form-input input[type="submit"] {
+        background-color: rgb(240, 178, 20);
+        color: white;
+        padding: 10px 20px;
+        width: 100%;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+      }
+
+      .form-input input[type="submit"]:hover {
+        background-color: #2e8b57;
+      }
+      .logo {
+        position: absolute;
+        top: 0; /* Position at the top of the login form */
+        left: 50%; /* Center horizontally */
+        transform: translateX(-50%);
+        height: 100px;
+        width: 100px;
+        border-radius: 50%;
+      }
+
+      /* Responsive styles using media queries */
+      @media only screen and (max-width: 600px) {
+        .login-form {
+          width: 90%;
+        }
+
+        .form-input input[type="email"],
+        .form-input input[type="password"] {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="login-form">
+        <img class="logo" src="{{asset('user/Bigbite.png')}}" alt="" />
+        <h2 class="admin-heading">Login</h2>
+
+        <div class="form-input">
+          <form method="POST" action="{{ route('login') }}">
+            @csrf
+
+            <div>
+              <label for="email">{{ __('Email Address') }}</label>
+              <input
+                id="email"
+                type="email"
+                class="form-control @error('email') is-invalid @enderror"
+                name="email"
+                value="{{ old('email') }}"
+                required
+                autocomplete="email"
+                autofocus
+              />
+
+              @error('email')
+              <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+              </span>
+              @enderror
+            </div>
+
+            <div>
+              <label for="password">{{ __('Password') }}</label>
+              <input
+                id="password"
+                type="password"
+                class="form-control @error('password') is-invalid @enderror"
+                name="password"
+                required
+                autocomplete="current-password"
+              />
+              @error('password')
+              <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+              </span>
+              @enderror
+            </div>
+            {{--
+            <div class="input" style="display: flex">
+              <div>
+                <input class="form-check-input" type="checkbox" name="remember"
+                id="remember" {{ old('remember') ? 'checked' : '' }}>
+              </div>
+              <div style="padding-left: 7px">
+                <label class="form-check-label" for="remember">
+                  {{ __('Remember Me') }}
+                </label>
+              </div>
+            </div>
+            --}}
+            <div>
+              @if (Route::has('password.request'))
+              <a class="btn btn-link" href="{{ route('password.request') }}">
+                {{ __('Forgot Your Password?') }}
+              </a>
+              @endif
+              <input type="submit" value="Login" />
+            </div>
+          </form>
+          <div>
+            <span>
+              Don't have an account?
+              <a class="btn btn-link" href="{{ route('register') }}">
+                Signup here</a
+              ></span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
